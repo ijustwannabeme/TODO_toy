@@ -1,0 +1,31 @@
+.todo-app {
+  margin: 50px 0;
+}
+
+.color-button {
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  border: none;
+  margin: 0 5px;
+}
+
+/* Fade-in 애니메이션 */
+.fade-in {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.fade-in.active {
+  opacity: 1;
+}
+
+/* Fade-out 애니메이션 */
+.fade-out {
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.fade-out.active {
+  opacity: 0;
+}
