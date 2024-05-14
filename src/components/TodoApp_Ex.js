@@ -47,8 +47,9 @@ function TodoApp() {
       })),
     );
   };
-  const handleButtonClick = (e) => {
-    const itemId = e.target.getAttribute("value");
+  const deleteButtonClick = (id) => {
+    console.log(id);
+    const itemId = id;
 
     // itemId와 일치하지 않는 아이템만 남기고 새로운 배열을 만듭니다.
     const updatedTodos = todos.filter((todo) => todo.id !== itemId);
@@ -90,12 +91,55 @@ function TodoApp() {
               style={{
                 border: todo.border,
                 backgroundColor: todo.color,
-                margin: "10px 500px",
+                margin: "10px auto",
                 listStyle: "none",
               }}
-              onClick={(e) => handleButtonClick(e)}
+              onClick={(e) => {
+                console.log(e);
+              }}
+              // onClick={() => {
+              //   console.log("수정");
+              // }}
+              // onClick={(e) => deleteButtonClick(e)}
             >
-              {todo.text}
+              <input
+                defaultValue={todo.text}
+                id={todo.id}
+                disabled={todo.disabled}
+                onClick={() => {
+                  setTodos((prevTodos) => {
+                    return prevTodos.map((item) => {
+                      if (item.id === todo.id) {
+                        return { ...item, disabled: false };
+                      }
+                      return item;
+                    });
+                  });
+                }}
+                onChange={(e) => {
+                  const newText = e.target.value;
+                  setTodos((prevTodos) => {
+                    return prevTodos.map((item) => {
+                      if (item.id === todo.id) {
+                        return { ...item, text: newText };
+                      }
+                      return item;
+                    });
+                  });
+                }}
+              />
+
+              <button
+                onClick={() => {
+                  console.log("수정된 값 반영");
+                }}
+              >
+                수정
+              </button>
+
+              <button type="button" class="btn btn-danger" onClick={() => deleteButtonClick(todo.id)}>
+                삭제
+              </button>
             </li>
           ))}
         </ul>
